@@ -38,7 +38,7 @@ I denne øvingen får dere utlevert noen \verb|.c| og \verb|.h|-filer under \ver
  \hline
  \verb|source/protein.c| & nei  \\ 
  \hline
- \verb|source/teco_krydder.c| & nei  \\
+ \verb|source/taco_krydder.c| & nei  \\
  \hline
  \verb|source/taco_lefse.c| & nei  \\ 
  \hline
@@ -66,6 +66,7 @@ mål : ingredienser
 \end{lstlisting}
 
 \subsection{Generell virkemåte}
+
 På starten av regelen er det definert et sluttprodukt (et mål). For å genere målet, forteller man \verb|make| at en rekke ingredienser, spesifisert etter kolonen, er nødvendig. Dersom alle disse ingrediensene er å oppdrive, vil \verb|make| følge oppskriften spesifisert under. Om en eller flere ingredienser mangler, vil \verb|make| forsøke å finne mål som kan bygge dem. \textcolor{RWTHrot100}{\textbf{Viktig at det bare er ett eneste tabulatorinnrykk mellom starten av linjen og stegene i oppskriften!}}.
 
 Et eksempel på en regel for å genere filen \verb|main.o|, kan sees her:
@@ -78,12 +79,13 @@ main.o : main.c constants.h
 Denne snutten leses slik: ``Filen \verb|main.o| avhenger av filene \verb|main.c| og \verb|constants.h|''. For å bygge  \verb|main.o|, kalles \verb|gcc -c main.c -o main.o|. Om hverken \verb|main.c| eller \verb|constants.h| har endret seg siden \verb|make| sist bygde \verb|main.o|, vil ingenting skje.
 
 I motsetning til reelle mål, har man også oppgaver som skal fullføres, men som i seg selv ikke produserer en håndfast fil (veldig vanlig å definere disse reglene med deklarasjonen \verb|.PHONY|):
-
-\begin{lstlisting}
+\\
+\begin{verbatim}
 .PHONY: clean
 clean :
         rm -f *.o
-\end{lstlisting}
+\end{verbatim}
+
 
 Deklarasjonen \verb|.PHONY| er egentlig ikke nødvendig så lenge man ikke har en fil som er kalt \verb|clean| i prosjektet. Det er uansett anbefalt å bruke \verb|.PHONY| for leselighet. I tillegg til at denne regelen ikke produserer en håndfast fil, så er ikke \verb|clean| avhengig av noen filer, fordi den ikke spesifiserer noe bak kolonen. Akkurat denne kommandoen er spesielt nyttig, ettersom den fjerner alle objektfilene som har blitt kompilert. 
 
@@ -247,16 +249,17 @@ rett og slett et spørsmål om personlig smak.
 
 Akkurat som i vanlige programmeringsspråk, kan man bruke betingelser for å teste en betingelse før en handling/regel blir utført. Betingelser kan være veldig nyttige, spesielt om man har et prosjekt som skal kunne bygges på forskjellige plattformer\footnote{Om man først skal støtte flere plattformer, er nok verktøyet \texttt{cmake} verdt å ta en titt på.}. Et eksempel på dette kan sees under: 
 
-\begin{lstlisting}
+\begin{verbatim}
 GCC_LIBS = -lgnu
 DEFAULT_LIBS = -lsystem_specific
 
 ifeq ($(CC), gcc)
-        $(CC) -o prog $(OBJ) $(GCC_LIBS)
+       $(CC) -o prog $(OBJ) $(GCC_LIBS)
 else
-        $(CC) -o prog $(OBJ) $(DEFAULT_LIBS)
+       $(CC) -o prog $(OBJ) $(DEFAULT_LIBS)
 endif
-\end{lstlisting}
+\end{verbatim}
+
 
 hvor \verb|ifeq| betyr \textbf{if eq}ual. Det er ikke nødvendig med en \verb|else| for å bruke \verb|ifeq| - og en \verb|else if| bruker syntaksen for \verb|else| med \verb|ifeq| foran: 
 

@@ -13,8 +13,6 @@
 % generisk tekst
 \usepackage[utf8]{inputenc}
 
-% for hyperlinks
-\usepackage{hyperref}
 
 % grafisk genering av directory
 \usepackage{dirtree}
@@ -39,7 +37,9 @@
   stringstyle=\color{mauve},
   breaklines=true,
   breakatwhitespace=true,
-  tabsize=3
+  tabsize=3,
+  mathescape=false,
+  morekeywords={ifeq, endif},
 }
 \lstset{literate=%
 {æ}{{\ae}}1
@@ -114,3 +114,7 @@
 }%
 
 \definecolor{RWTHrot100}{rgb}{0.800000 0.027451 0.117647}
+
+
+% for hyperlinks
+\usepackage{hyperref}
