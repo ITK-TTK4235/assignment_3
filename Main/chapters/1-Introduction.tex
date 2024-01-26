@@ -29,30 +29,34 @@ I denne øvingen får dere utlevert noen \verb|.c| og \verb|.h|-filer under \ver
 \begin{center}
  \begin{tabular}{|p{8.5cm} p{5.5cm}|} 
  \hline
- \textbf{Filer} & \textbf{Skal denne filen endres?}  \\ [0.5ex] 
+ \textbf{Filer} & \textbf{Skal filen(e) endres?}  \\ [0.5ex] 
  \hline\hline
-  \verb|source/main.c| & nei  \\ 
+  \verb|source/main.c| & Nei  \\ 
  \hline
- \verb|source/drikke.c| & nei  \\ 
+ \verb|source/drikke.c| & Nei  \\ 
  \hline
- \verb|source/grønnsaker.c| & nei  \\ 
+ \verb|source/grønnsaker.c| & Nei  \\ 
  \hline
- \verb|source/protein.c| & nei  \\ 
+ \verb|source/protein.c| & Nei  \\ 
  \hline
- \verb|source/taco_krydder.c| & nei  \\
+ \verb|source/taco_krydder.c| & Nei  \\
  \hline
- \verb|source/taco_lefse.c| & nei  \\ 
+ \verb|source/taco_lefse.c| & Nei  \\ 
  \hline
-  \verb|source/taco_saus.c| & nei  \\ 
+  \verb|source/taco_saus.c| & Nei  \\ 
  \hline
+   \verb|Main/*| & Nei  \\ 
+ \hline
+  \verb|.github/*| & Nei \\
+ \hline 
 \end{tabular}
 \end{center}
 
 \section{Introduksjon - Praktisk rundt øvingen}
 
- \textit{GNU make} er et automatisk byggeverktøy som kan gjøre store prosjekter mer håndterlig. Automatisk bygging er spesielt nyttig dersom det tar lang tid å gjenkompilere hver eneste fil hver gang en fil endres. Med et automatisk byggeverktøy, kan man i praksis definere et forhåndsbestemt hierarki av hvilken filer som avhenger av hvilke andre filer. Med et hierarki, kan et automatisk byggeverktøy selektivt kompilere kun de filene som har endret seg og filene som er avhengig av de endrede filene.
+ \textit{GNU make} er et automatisk byggeverktøy som kan gjøre store prosjekter lettere å håndtere. Automatisk bygging er spesielt nyttig dersom det tar lang tid å gjenkompilere hver eneste fil hver gang en fil endres. Med et automatisk byggeverktøy, kan man i praksis definere et forhåndsbestemt hierarki av hvilke filer som avhenger av hvilke andre filer. Med et slikt hierarki kan et automatisk byggeverktøy selektivt kompilere kun de filene som har endret seg og filene som er avhengig av de endrede filene.
  
- I praksis har mange programmeringsspråk sine egne byggeverktøy: \verb|gb| for \verb|golang|, \verb|rake| for \verb|ruby|, \verb|mix| for \verb|elixir|, eller \verb|rebar| for \verb|erlang|. Fordelen med verktøy som \textit{GNU make} (fra nå av kalt \verb|make|) og \verb|ninja| er at de ikke er bundet til et spesifikt språk. Dette gjør \verb|make| veldig allsidig som fører til at \verb|make| kan bygge hva som helst, så lenge brukeren kan kommandoene som skal kalles og i hvilken rekkefølge.
+ I praksis har mange programmeringsspråk sine egne byggeverktøy: \verb|gb| for \verb|golang|, \verb|rake| for \verb|ruby|, \verb|mix| for \verb|elixir|, og \verb|rebar| for \verb|erlang|. Fordelen med verktøy som \textit{GNU make} (fra nå av kalt \verb|make|) og \verb|ninja| er at de ikke er bundet til et spesifikt språk. Dette gjør \verb|make| veldig allsidig som fører til at \verb|make| kan bygge hva som helst, så lenge brukeren kan kommandoene som skal kalles og i hvilken rekkefølge.
  
  Introduksjon \ref{sec:2-innforing} gir en innføring i bruk av \verb|make|. Oppgavene finner dere i seksjon \ref{sec:3-oppgave}. I tillegg er det inkludert mer informasjon i appendiks \ref{4-appendiks} som ikke er obligatorisk, men er nyttig for heis-labben for en mer elegant bruk av \verb|make|. For mer informasjon om \verb|make|, ligger manualen (utgitt av Free Software Foundation) ute på \href{https://www.gnu.org/software/make/manual/make.html}{https://www.gnu.org}.
  
@@ -68,7 +72,7 @@ mål : ingredienser
 
 \subsection{Generell virkemåte}
 
-På starten av regelen er det definert et sluttprodukt (et mål). For å genere målet, forteller man \verb|make| at en rekke ingredienser, spesifisert etter kolonen, er nødvendig. Dersom alle disse ingrediensene er å oppdrive, vil \verb|make| følge oppskriften spesifisert under. Om en eller flere ingredienser mangler, vil \verb|make| forsøke å finne mål som kan bygge dem. \textcolor{RWTHrot100}{\textbf{Viktig at det bare er ett eneste tabulatorinnrykk mellom starten av linjen og stegene i oppskriften!}}.
+På starten av regelen er det definert et sluttprodukt (et mål). For å genere målet, forteller man \verb|make| at en rekke ingredienser, spesifisert etter kolonnen, er nødvendig. Dersom alle disse ingrediensene er å oppdrive, vil \verb|make| følge oppskriften spesifisert under. Om en eller flere ingredienser mangler, vil \verb|make| forsøke å finne mål som kan bygge dem. \textcolor{RWTHrot100}{\textbf{Viktig at det bare er ett eneste tabulatorinnrykk mellom starten av linjen og stegene i oppskriften!}}.
 
 Et eksempel på en regel for å genere filen \verb|main.o|, kan sees her:
 
@@ -111,7 +115,7 @@ protein.o : protein.c
         gcc -c protein.c
 \end{lstlisting}
 
-Dette er en regel for å bygge en tacosimulator \verb|taco|, som avhenger av en rekke filer (\verb|ost.o, lefse.o, saus.o, protein,o|) som må kompileres før den den kjørebare filen i seg selv kan bygges. Hvis ikke alle objektfilene er til stede, vil \verb|make| fortsette å lete nedover for å finne en regel for å bygge det som mangler. I dette tilfellet vil \verb|make| prøve å bygge \verb|taco| først. Dersom \verb|ost.o| ikke finnes vil \verb|make| kompilere \verb|ost.o| ved å lete nedover i koden. Deretter vil \verb|make| fortsette med \verb|taco|-regelen.
+Dette er en regel for å bygge en tacosimulator \verb|taco|, som avhenger av en rekke filer (\verb|ost.o, lefse.o, saus.o, protein,o|) som må kompileres før selve den kjørbare filen i kan bygges. Hvis ikke alle objektfilene er til stede, vil \verb|make| fortsette å lete nedover for å finne en regel for å bygge det som mangler. I dette tilfellet vil \verb|make| prøve å bygge \verb|taco| først. Dersom \verb|ost.o| ikke finnes vil \verb|make| kompilere \verb|ost.o| ved å lete nedover i koden. Deretter vil \verb|make| fortsette med \verb|taco|-regelen.
 
 I utgangspunktet er det viktig å spesifisere hvilken av reglene som skal kalles. Dersom man kaller \verb|make| fra kommandolinjen, vil \verb|make| finne den første regelen
 som ikke starter med et punktum, og så forsøke å utføre den. Alle andre
@@ -132,7 +136,7 @@ production : main.c
         gcc main.c -O3
 \end{lstlisting}
 
-hvor \verb|-O0 -g3| er vanlige flag som blir gitt til \verb|gcc| for å kompilere \verb|main.c|. \verb|-O0| reduserer tiden det tar for å kompilere koden, mens \verb|-g3| brukes for å generere debugging informasjon. I noen situasjoner kan det være lurt å ikke kompilere \verb|gcc| med \verb|-O0| fordi det fjerner muligheten til å optimalisere ytelsen til koden. 
+hvor \verb|-O0 -g3| er vanlige flag som blir gitt til \verb|gcc| for å kompilere \verb|main.c|. \verb|-O0| reduserer tiden det tar for å kompilere koden, mens \verb|-g3| brukes for å generere debugging-informasjon. I noen situasjoner kan det være lurt å ikke kompilere \verb|gcc| med \verb|-O0| fordi det fjerner muligheten til å optimalisere ytelsen til koden. 
 
 \subsection{Variabler i regler}
 
@@ -147,9 +151,9 @@ taco : $(OBJ)
 
 Konvensjonen er å definere variabler med store tegn (kommer fra \textit{shellscripting}), men det er opp til brukeren om denne konvensjonen følges eller ei.
 
-\subsubsection{De to variabel variantene}
+\subsubsection{De to variabel-variantene}
 
-\verb|make| har to forskjellige varianter av variabler - \textit{rekursive} og \textit{enkle}. En \textit{rekursiv} variabel ekspanderer til hva enn variabelen referer. For eksempel, vil \verb|default| i kodesnutten under, skrive ut variabelen \verb|LEFSE|, som referer til variabelen \verb|MEL|, som igjen referer til variabelen \verb|KORN|, som til slutt inneholder strengen \verb|"karbohydrater"|. I dette tilfellet vil output være strengen \verb|"karbohydrater"| dersom man kaller \verb|make|.
+\verb|make| har to forskjellige varianter av variabler - \textit{rekursive} og \textit{enkle}. En \textit{rekursiv} variabel ekspanderer til hva enn variabelen referer til. For eksempel, vil \verb|default| i kodesnutten under, skrive ut variabelen \verb|LEFSE|, som referer til variabelen \verb|MEL|, som igjen referer til variabelen \verb|KORN|, som til slutt inneholder strengen \verb|"karbohydrater"|. I dette tilfellet vil output være strengen \verb|"karbohydrater"| dersom man kaller \verb|make|.
 
 \begin{lstlisting}
 LEFSE = $(MEL)
