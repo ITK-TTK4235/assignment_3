@@ -10,8 +10,8 @@ char * taco_lefse(unsigned int taco_points);
 char * drikke(unsigned int taco_points);
 
 void print_custom_taco_recipe(char * name, int taco_points){
-    printf("\n%s sin spesielle taco oppskrift (krever %d taco poeng!):\n", name,taco_points);
-    printf(" - Taco Krydder:\n      \"");
+    printf("\n%s sin spesielle tacooppskrift (krever %d tacopoeng!):\n", name,taco_points);
+    printf(" - Tacokrydder:\n      \"");
     printf("%s",taco_krydder(taco_points));
     printf("\"\n\n");
 
@@ -19,7 +19,7 @@ void print_custom_taco_recipe(char * name, int taco_points){
     printf("%s",protein(taco_points));
     printf("\"\n\n");
 
-    printf(" - Taco saus:\n      \"");
+    printf(" - Tacosaus:\n      \"");
     printf("%s",taco_saus(taco_points));
     printf("\"\n\n");
 
@@ -27,7 +27,7 @@ void print_custom_taco_recipe(char * name, int taco_points){
     printf("%s",gronnsaker(taco_points));
     printf("\"\n\n");
 
-    printf(" - Taco lefse:\n      \"");
+    printf(" - Tacolefse:\n      \"");
     printf("%s",taco_lefse(taco_points));
     printf("\"\n\n");
 

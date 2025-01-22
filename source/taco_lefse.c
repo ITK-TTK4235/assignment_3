@@ -3,7 +3,7 @@ static char * TEXT[] = {
     "First Price Hvetetortialla",
     "Santa Maria Super soft medium Tortiall Original",
     "Old El Paso Mexicana Street Market White Corn Tortillas",
-    "Rema 1000 Tex Mex Taco Skjell"
+    "Rema 1000 Tex Mex Tacoskjell"
 };
 
 

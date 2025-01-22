@@ -1,11 +1,11 @@
 static char * TEXT[] = {
-    "Vegetariansk kjøttdeig",
+    "Vegetarisk kjøttdeig",
     "Tofu",
     "Argentinske villreker",
-    "Tilapia fisk",
+    "Tilapiafisk",
     "Jeju svart gris",
-    "Hanwoo biff",
-    "Wagyu biff"
+    "Hanwoo-biff",
+    "Wagyu-biff"
 };
 
 char * protein(unsigned int degree){

@@ -1,9 +1,9 @@
 static char * TEXT[] = {
     "Løk + Mais",
-    "Cherry tomater + Avokado",
+    "Cherrytomater + Avokado",
     "Ananas + Nacho",
     "Sørlandschips Spansk Paprika",
-    "Gruyere Ost + Mango",
+    "Gruyere-ost + Mango",
     "Chilibønner"
 };
 

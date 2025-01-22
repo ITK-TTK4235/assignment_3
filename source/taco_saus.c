@@ -1,8 +1,8 @@
 static char * TEXT[] = {
     "Coop Tex Mex Taco Mild Sauce",
-    "First Price Taco Saus",
+    "First Price Tacosaus",
     "Broken Taco Almost Illegal Salsa",
-    "Broken Taco Supreme Taco Topping",
+    "Broken Taco Supreme Tacotopping",
     "Heinz Ketchup",
     "Tine Rømme",
     "Huy Fong Sriracha"
