@@ -169,7 +169,9 @@ Problemet med \textit{rekursive}-variabler er at man ikke kan skrive koder som d
 \begin{lstlisting}
 CFLAGS = $(CFLAGS) -O0 -g3
 \end{lstlisting}
-Denne kodesnutten vil føre til en evig løkke. For å realisere denne type oppførsel kan man bruke \textit{enkle} variabler. Enkle variabler settes med enten \verb|:=| eller \verb|::=|\footnote{\textit{GNU make} støtter begge, og de er ekvivalente, men \textit{POSIX} definerer kun \texttt{::=}}:
+Ved bruk av rekursive variable, vil denne kodesnutten føre til en evig løkke. 
+En slik formulering kan imidlertid være nyttig for å oppdatere variabelens innhold dynamisk. 
+For å realisere denne type oppførsel uten å få en evig løkke kan man bruke \textit{enkle} variabler. Enkle variabler settes med enten \verb|:=| eller \verb|::=|\footnote{\textit{GNU make} støtter begge, og de er ekvivalente, men \textit{POSIX} definerer kun \texttt{::=}}:
 \begin{lstlisting}
 X := "sjokolade"
 Y := "$(X)kake"
